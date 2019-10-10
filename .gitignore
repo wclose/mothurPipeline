@@ -2,6 +2,9 @@
 /data/**
 !/data/**/
 
+# Logs
+/logs/**
+
 # Track all READMEs
 !README.md
 
