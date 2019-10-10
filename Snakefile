@@ -1,12 +1,16 @@
 # Snakemake file for running mothur pipeline in Close_AbxVirome_XXXX_2019
 
-mothurSamples = list(set(glob_wildcards(os.path.join('data/mothur/raw/', '{sample}_{readNum, R[12]}_001.fastq.gz')).sample))
+# NOTE: Change these settings before running workflow
 mothurMock = ['Mock1','Mock2','Mock3','Mock4']
 mothurControl = ['NA','Water','Water2','Water3','Water4']
-readNum = ['R1', 'R2']
-mothurGroups = ['sample','mock','control']
 mothurAlpha = ['nseqs','coverage','invsimpson','shannon','sobs']
 mothurBeta = ['sharedsobs','thetayc','braycurtis']
+
+# Leave these settings as is
+mothurSamples = list(set(glob_wildcards(os.path.join('data/mothur/raw/', '{sample}_{readNum, R[12]}_001.fastq.gz')).sample))
+readNum = ['R1', 'R2']
+mothurGroups = ['sample','mock','control']
+
 
 
 rule all:
