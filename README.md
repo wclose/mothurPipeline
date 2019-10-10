@@ -27,15 +27,21 @@ There is a script (`coda/bash/mothurNames.sh`) you can use to change hyphens to 
 cp PATH/TO/SEQUENCEDIR/* data/mothur/raw
 ```
 
+<br />
+
 **2.** Create the master Snakemake environment. **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
 ```
 conda env create -f envs/snakemake.yaml
 ```
 
+<br />
+
 **3.** Activate the environment that contains snakemake.
 ```
 conda activate snakemake
 ```
+
+<br />
 
 **4.** Edit the options at the top of the Snakefile to set downstream analysis options.
 ```
@@ -48,12 +54,23 @@ Things to change (everything else can/should be left as is):
 * **mothurAlpha**: The names of the alpha diversity metrics you want calculated. More info [HERE](https://www.mothur.org/wiki/Summary.single). 
 * **mothurBeta**: The names of the beta diversity metrics you want calculated. More info [HERE](https://www.mothur.org/wiki/Dist.shared).
 
+<br />
+
 **5.** Test the workflow to make sure everything looks good.
 ```
-snakemake --use-conda -np
+snakemake -np
 ```
 
-**6.** Run the workflow to generate the desired outputs. All of the results will be available in `data/mothur/process/` when the workflow is completed. Should something go wrong, all of the log files will be available in `logs/mothur/`.
+<br />
+
+**6** If you want to see how everything fits together, you can run the following to generate a flowchart of the various steps. You may need to download the resulting image locally to view it properly.
+```
+snakemake --dag | dot -Tsvg > dag.svg
+```
+
+<br />
+
+**7.** Run the workflow to generate the desired outputs. All of the results will be available in `data/mothur/process/` when the workflow is completed. Should something go wrong, all of the log files will be available in `logs/mothur/`.
 ```
 snakemake --use-conda
 ```
