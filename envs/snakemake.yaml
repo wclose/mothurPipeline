@@ -1,0 +1,6 @@
+name: mothur
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - snakemake-minimal=5.5.4
