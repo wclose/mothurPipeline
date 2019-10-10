@@ -12,14 +12,18 @@ This repo can be used to generate all of the desired output files from mothur (s
 #### Running analysis
 
 1. Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo.
->> **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). E.g. a sequence file from mouse 10, day 10: **BAD** = *M10-10*_S91_L001_R1_001.fastq.gz; **BAD** = *M10_10*_S91_L001_R1_001.fastq.gz; **GOOD** = *M10D10_S91*_L001_R1_001.fastq.gz. There is a script (`coda/bash/mothurNames.sh`) you can use to change hyphens to something else. Feel free to modify it for removing extra underscores as needed.
-
+    > **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
+    > E.g. a sequence file from mouse 10, day 10:
+        > * **BAD** = *M10-10*_S91_L001_R1_001.fastq.gz
+        > * **BAD** = *M10_10*_S91_L001_R1_001.fastq.gz
+        > * **GOOD** = *M10D10_S91*_L001_R1_001.fastq.gz 
+    > There is a script (`coda/bash/mothurNames.sh`) you can use to change hyphens to something else. Feel free to modify it for removing extra underscores as needed.
 ```
 cp PATH/TO/SEQUENCEDIR/* data/mothur/raw
 ```
 
 2. Create the master Snakemake environment.
->> **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
+    > **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
 ```
 conda env create -f envs/snakemake.yaml
 ```
@@ -35,10 +39,10 @@ nano Snakefile
 ```
 
 Things to change (everything else can/should be left as is):
-* mothurMock: Put the names (just the names of the samples, not the full filename with all of the sequencer information) of all of your mock samples here.
-* mothurControl: Sames as for the mocks, you'll want to put the names of your controls here.
-* mothurAlpha: The names of the alpha diversity metrics you want calculated. More info [HERE](https://www.mothur.org/wiki/Summary.single). 
-* mothurBeta: The names of the beta diversity metrics you want calculated. More info [HERE](https://www.mothur.org/wiki/Dist.shared).
+* **mothurMock**: Put the names (just the names of the samples, not the full filename with all of the sequencer information) of all of your mock samples here.
+* **mothurControl**: Sames as for the mocks, you'll want to put the names of your controls here.
+* **mothurAlpha**: The names of the alpha diversity metrics you want calculated. More info [HERE](https://www.mothur.org/wiki/Summary.single). 
+* **mothurBeta**: The names of the beta diversity metrics you want calculated. More info [HERE](https://www.mothur.org/wiki/Dist.shared).
 
 5. Test the workflow to make sure everything looks good.
 ```
