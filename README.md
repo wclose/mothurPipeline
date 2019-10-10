@@ -13,10 +13,10 @@ This repo can be used to generate all of the desired output files from mothur (s
 
 1. Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo.
     > **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
-    > E.g. a sequence file from mouse 10, day 10:
-        > * **BAD** = *M10-10*_S91_L001_R1_001.fastq.gz
-        > * **BAD** = *M10_10*_S91_L001_R1_001.fastq.gz
-        > * **GOOD** = *M10D10_S91*_L001_R1_001.fastq.gz 
+    > E.g. a sequence file from mouse 10, day 10:  
+        > **BAD** = *M10-10*_S91_L001_R1_001.fastq.gz  
+        > **BAD** = *M10_10*_S91_L001_R1_001.fastq.gz  
+        > **GOOD** = *M10D10_S91*_L001_R1_001.fastq.gz   
     > There is a script (`coda/bash/mothurNames.sh`) you can use to change hyphens to something else. Feel free to modify it for removing extra underscores as needed.
 ```
 cp PATH/TO/SEQUENCEDIR/* data/mothur/raw
