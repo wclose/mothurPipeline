@@ -1,8 +1,8 @@
 # Snakemake file for running mothur pipeline in Close_AbxVirome_XXXX_2019
 
 # NOTE: Change these settings before running workflow
-mothurMock = ['Mock1','Mock2','Mock3','Mock4']
-mothurControl = ['NA','Water','Water2','Water3','Water4']
+mothurMock = ['Mock1','Mock2']
+mothurControl = ['NA','Water','Water2']
 mothurAlpha = ['nseqs','coverage','invsimpson','shannon','sobs']
 mothurBeta = ['sharedsobs','thetayc','braycurtis']
 
