@@ -30,6 +30,7 @@ rule all:
 		"data/mothur/process/error_analysis/errorinput.pick.error.summary"
 	shell:
 		"""
+		rm data/mothur/process/*rabund
 		mkdir -p logs/mothur/
 		mv mothur*logfile logs/mothur/
 		"""
