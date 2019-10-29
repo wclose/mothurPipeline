@@ -100,6 +100,7 @@ snakemake --use-conda
 
 * To run the rules as individual jobs on a PBS cluster:
 ```
+mkdir -p logs/pbs/
 snakemake --use-conda --profile config/pbs-torque/ --latency 90
 ```
 Or to run a job that manages the workflow for you instead
@@ -111,6 +112,7 @@ qsub code/snakemake.pbs
 
 * To run the rules as individual jobs on a Slurm cluster:
 ```
+mkdir -p logs/slurm/
 snakemake --use-conda --profile config/slurm/ --latency 90
 ```
 Or to run a job that manages the workflow for you instead
