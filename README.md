@@ -9,9 +9,12 @@ This repo can be used to generate all of the desired output files from mothur (s
 * Have paired end sequencing data.
 * That's it!
 
+<br />
+
 #### Running analysis
 
-**1.** Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo. **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
+**1.** Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo. 
+> **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
 
 <br />
 
@@ -29,7 +32,8 @@ cp PATH/TO/SEQUENCEDIR/* data/mothur/raw
 
 <br />
 
-**2.** Create the master Snakemake environment. **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
+**2.** Create the master Snakemake environment.
+> **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
 ```
 conda env create -f envs/snakemake.yaml
 ```
@@ -75,9 +79,43 @@ snakemake --dag | dot -Tsvg > dag.svg
 snakemake --use-conda
 ```
 
+<br />
 
+#### Running the workflow on a cluster
 
+**1.** Before running any jobs on the cluster, change the `ACCOUNT` and `EMAIL` fields in the following files for whichever cluster you're using:
+* PBS: [cluster profile configuration](config/pbs-torque/cluster.json) and the [cluster submission script](code/snakemake.pbs)
+* Slurm: [cluster profile configuration](config/slurm/cluster.json) and the [cluster submission script](code/snakemake.sh)
 
+<br /> 
 
+**2.** Run the Snakemake workflow.
+> **Note**: If you wish to rerun the workflow after having it successfully complete, use the `--forcerun` or the `--forceall` flags.
+* To run the entire workflow locally (without the cluster):
+```
+snakemake --use-conda
+```
 
+<br /> 
 
+* To run the rules as individual jobs on a PBS cluster:
+```
+mkdir -p logs/pbs/
+snakemake --use-conda --profile config/pbs-torque/ --latency 90
+```
+Or to run a job that manages the workflow for you instead
+```
+qsub code/snakemake.pbs
+```
+
+<br /> 
+
+* To run the rules as individual jobs on a Slurm cluster:
+```
+mkdir -p logs/slurm/
+snakemake --use-conda --profile config/slurm/ --latency 90
+```
+Or to run a job that manages the workflow for you instead
+```
+sbatch code/snakemake.sh
+```
