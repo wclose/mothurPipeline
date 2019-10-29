@@ -10,7 +10,7 @@ __default__:
   email: "EMAIL"
   mailon: "bea"
   jobout: "oe"
-  outdir: "logs/flux/"
+  outdir: "logs/pbs/"
 
 
 

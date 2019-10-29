@@ -35,7 +35,7 @@
 ####  Join output and error; pass environment to job
 
 #PBS -j oe
-#PBS -o logs/flux/
+#PBS -o logs/pbs/
 #PBS -V
 
 # Add a note here to say what software modules should be loaded.
@@ -73,7 +73,7 @@ fi
 
 
 # Making log directory
-mkdir logs/flux/
+mkdir logs/pbs/
 
 # Initiating snakemake and running workflow in cluster mode
 snakemake --use-conda --profile config/pbs-torque/ --latency-wait 90
