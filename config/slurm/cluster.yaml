@@ -9,7 +9,7 @@ __default__:
   partition: "standard"
   mailuser: "EMAIL"
   mailtype: "BEGIN,END,FAIL"
-  output: "code/log/%x-%j.out"
+  output: "logs/slurm/%x-%j.out"
 
 
 
