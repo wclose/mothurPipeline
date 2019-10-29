@@ -45,9 +45,6 @@ rule all:
 #
 ##################################################################
 
-# Add conda env
-# Add log file
-# ~15 min with 8GB
 rule get16SReferences:
 	input:
 		script="code/bash/mothurReferences.sh"
@@ -61,9 +58,6 @@ rule get16SReferences:
 		"bash {input.script}"
 
 
-# Add conda env
-# Add log file
-# ~15 min with 8GB
 rule get16SMock:
 	input:
 		script="code/bash/mothurMock.sh",
@@ -85,8 +79,6 @@ rule get16SMock:
 #
 ##################################################################
 
-# Add log file
-# ~2 h with 48GB
 rule make16SShared:
 	input:
 		script="code/bash/mothurShared.sh",
@@ -104,8 +96,6 @@ rule make16SShared:
 		"bash {input.script} data/mothur/raw/ {input.refs}"
 
 
-# Add log file
-# ~2 h with 48GB
 rule split16SShared:
 	input:
 		script="code/bash/mothurSplitShared.sh",
@@ -122,9 +112,6 @@ rule split16SShared:
 		"bash {input.script} {params.mockGroups} {params.controlGroups}"
 
 
-# Add conda env
-# Add log file
-# ~5 min with 48GB
 rule count16SShared:
 	input:
 		script="code/bash/mothurCountShared.sh",
@@ -137,9 +124,6 @@ rule count16SShared:
 		"bash {input.script} {input.shared}"
 
 
-# Add conda env
-# Add log file
-# ~5 min with 48GB
 rule subsample16SShared:
 	input:
 		script="code/bash/mothurSubsampleShared.sh",
@@ -162,8 +146,6 @@ rule subsample16SShared:
 #
 ##################################################################
 
-# Add log file
-# ~15 min 48 GB
 rule rarefy16SReads:
 	input:
 		script="code/bash/mothurRarefaction.sh",
@@ -176,8 +158,6 @@ rule rarefy16SReads:
 		"bash {input.script} {input.shared}"
 
 
-# Add log file
-# ~15 min 48GB
 rule calc16SAlphaDiversity:
 	input:
 		script="code/bash/mothurAlpha.sh",
@@ -193,8 +173,6 @@ rule calc16SAlphaDiversity:
 		"bash {input.script} {input.shared} {input.count} {params.alpha}"
 
 
-# Add log file
-# ~20 min 48GB
 rule calc16SBetaDiversity:
 	input:
 		script="code/bash/mothurBeta.sh",
@@ -220,8 +198,6 @@ rule calc16SBetaDiversity:
 #
 ##################################################################
 
-# Add log file
-# ~10 min 48GB
 rule calc16SPCoA:
 	input:
 		script="code/bash/mothurPCoA.sh",
@@ -235,8 +211,6 @@ rule calc16SPCoA:
 		"bash {input.script} {input.dist}"
 
 
-# Add log file
-# ~10 min 48GB
 rule calc16SNMDS:
 	input:
 		script="code/bash/mothurNMDS.sh",
@@ -259,8 +233,6 @@ rule calc16SNMDS:
 #
 ##################################################################
 
-# Add log file
-# ~10 min 48GB
 rule calc16SError:
 	input:
 		script="code/bash/mothurError.sh",
