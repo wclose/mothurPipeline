@@ -1,0 +1,69 @@
+__default__:
+  jobname: "{rule}.{wildcards}"
+  nodes: 1
+  ppn: 1
+  pmem: "4000mb"
+  walltime: "15:00"
+  qos: "flux"
+  account: "ACCOUNT"
+  queue: "fluxod"
+  email: "EMAIL"
+  mailon: "bea"
+  jobout: "oe"
+  outdir: "logs/flux/"
+
+
+
+##################################################################
+#
+# Mothur 
+#
+##################################################################
+
+get16SReferences:
+  ppn: 4
+  walltime: "30:00"
+
+get16SMock:
+  ppn: 4
+  walltime: "30:00"
+
+make16SShared:
+  ppn: 12
+  walltime: "6:00:00"
+
+split16SShared:
+  ppn: 4
+  walltime: "30:00"
+
+count16SShared:
+  ppn: 4
+  walltime: "30:00"
+
+subsample16SShared:
+  ppn: 4
+  walltime: "30:00"
+
+rarefy16SReads:
+  ppn: 4
+  walltime: "30:00"
+
+calc16SAlphaDiversity:
+  ppn: 12
+  walltime: "45:00"
+
+calc16SBetaDiversity:
+  ppn: 12
+  walltime: "45:00"
+
+calc16SPCoA:
+  ppn: 6
+  walltime: "45:00"
+
+calc16SNMDS:
+  ppn: 6
+  walltime: "45:00"
+
+calc16SError:
+  ppn: 4
+  walltime: "30:00"

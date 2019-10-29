@@ -1,0 +1,68 @@
+__default__:
+  jobname: "{rule}.{wildcards}"
+  nodes: 1
+  ntaskspernode: 1
+  cpuspertask: 1
+  mempercpu: "4000mb"
+  time: "15:00"
+  account: "ACCOUNT"
+  partition: "standard"
+  mailuser: "EMAIL"
+  mailtype: "BEGIN,END,FAIL"
+  output: "code/log/%x-%j.out"
+
+
+
+##################################################################
+#
+# Mothur 
+#
+##################################################################
+
+get16SReferences:
+  cpuspertask: 4
+  time: "30:00"
+
+get16SMock:
+  cpuspertask: 4
+  time: "30:00"
+
+make16SShared:
+  cpuspertask: 12
+  time: "6:00:00"
+
+split16SShared:
+  cpuspertask: 4
+  time: "30:00"
+
+count16SShared:
+  cpuspertask: 4
+  time: "30:00"
+
+subsample16SShared:
+  cpuspertask: 4
+  time: "30:00"
+
+rarefy16SReads:
+  cpuspertask: 4
+  time: "30:00"
+
+calc16SAlphaDiversity:
+  cpuspertask: 12
+  time: "45:00"
+
+calc16SBetaDiversity:
+  cpuspertask: 12
+  time: "45:00"
+
+calc16SPCoA:
+  cpuspertask: 6
+  time: "45:00"
+
+calc16SNMDS:
+  cpuspertask: 6
+  time: "45:00"
+
+calc16SError:
+  cpuspertask: 4
+  time: "30:00"
