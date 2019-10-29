@@ -9,6 +9,8 @@ This repo can be used to generate all of the desired output files from mothur (s
 * Have paired end sequencing data.
 * That's it!
 
+<br />
+
 #### Running analysis
 
 **1.** Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo. **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
@@ -74,6 +76,8 @@ snakemake --dag | dot -Tsvg > dag.svg
 ```
 snakemake --use-conda
 ```
+
+<br />
 
 #### Running the workflow on a cluster
 
