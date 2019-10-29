@@ -84,8 +84,8 @@ snakemake --use-conda
 #### Running the workflow on a cluster
 
 **1.** Before running any jobs on the cluster, change the `ACCOUNT` and `EMAIL` fields in the following files for whichever cluster you're using:
-* PBS: [cluster profile configuration](config/pbs-torque/cluster.json) and the [cluster submission script](code/snakemake.pbs)
-* Slurm: [cluster profile configuration](config/slurm/cluster.json) and the [cluster submission script](code/snakemake.sh)
+* PBS: [cluster profile configuration](config/pbs-torque/cluster.yaml) and the [cluster submission script](code/snakemake.pbs)
+* Slurm: [cluster profile configuration](config/slurm/cluster.yaml) and the [cluster submission script](code/snakemake.sh)
 
 <br /> 
 
