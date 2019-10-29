@@ -13,7 +13,8 @@ This repo can be used to generate all of the desired output files from mothur (s
 
 #### Running analysis
 
-**1.** Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo. **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
+**1.** Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo. 
+> **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
 
 <br />
 
@@ -31,7 +32,8 @@ cp PATH/TO/SEQUENCEDIR/* data/mothur/raw
 
 <br />
 
-**2.** Create the master Snakemake environment. **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
+**2.** Create the master Snakemake environment.
+> **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
 ```
 conda env create -f envs/snakemake.yaml
 ```
@@ -87,7 +89,8 @@ snakemake --use-conda
 
 <br /> 
 
-**2.** Run the Snakemake workflow. **Note**: If you wish to rerun the workflow after having it successfully complete, use the `--forcerun` or the `--forceall` flags.
+**2.** Run the Snakemake workflow.
+> **Note**: If you wish to rerun the workflow after having it successfully complete, use the `--forcerun` or the `--forceall` flags.
 * To run the entire workflow locally (without the cluster):
 ```
 snakemake --use-conda
