@@ -75,9 +75,38 @@ snakemake --dag | dot -Tsvg > dag.svg
 snakemake --use-conda
 ```
 
+#### Running the workflow on a cluster
 
+**1.** Before running any jobs on the cluster, change the `ACCOUNT` and `EMAIL` fields in the following files for whichever cluster you're using:
+* PBS: [cluster profile configuration](config/pbs-torque/cluster.json) and the [cluster submission script](code/snakemake.pbs)
+* Slurm: [cluster profile configuration](config/slurm/cluster.json) and the [cluster submission script](code/snakemake.sh)
 
+<br /> 
 
+**2.** Run the Snakemake workflow. **Note**: If you wish to rerun the workflow after having it successfully complete, use the `--forcerun` or the `--forceall` flags or just delete the `results/` directory by running `snakemake clean`.
+* To run the entire workflow locally (without the cluster):
+```
+snakemake
+```
 
+<br /> 
 
+* To run the rules as individual jobs on a PBS cluster:
+```
+snakemake --profile config/pbs-torque/ --latency 20
+```
+Or to run a job that manages the workflow for you instead
+```
+qsub code/snakemake.pbs
+```
 
+<br /> 
+
+* To run the rules as individual jobs on a Slurm cluster:
+```
+snakemake --profile config/slurm/ --latency 20
+```
+Or to run a job that manages the workflow for you instead
+```
+sbatch code/snakemake.sh
+```
