@@ -34,6 +34,3 @@ echo PROGRESS: Calculating alpha diversity and subsampling to "${READCOUNT}" rea
 # Calculating alpha diversity
 # If a sample doesn't have enough reads, it'll be eliminated from the analysis
 mothur "#summary.single(shared="${SHARED}", calc="${ALPHA}", subsample="${READCOUNT}")"
-
-# Cleaning up rabund files
-rm $(find $(echo "${SHARED}" | sed 's/\(.*\/\).*/\1/') -regex ".*final\..*\.rabund")
