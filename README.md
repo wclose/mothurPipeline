@@ -87,17 +87,17 @@ snakemake --use-conda
 
 <br /> 
 
-**2.** Run the Snakemake workflow. **Note**: If you wish to rerun the workflow after having it successfully complete, use the `--forcerun` or the `--forceall` flags or just delete the `results/` directory by running `snakemake clean`.
+**2.** Run the Snakemake workflow. **Note**: If you wish to rerun the workflow after having it successfully complete, use the `--forcerun` or the `--forceall` flags.
 * To run the entire workflow locally (without the cluster):
 ```
-snakemake
+snakemake --use-conda
 ```
 
 <br /> 
 
 * To run the rules as individual jobs on a PBS cluster:
 ```
-snakemake --profile config/pbs-torque/ --latency 20
+snakemake --use-conda --profile config/pbs-torque/ --latency 90
 ```
 Or to run a job that manages the workflow for you instead
 ```
@@ -108,7 +108,7 @@ qsub code/snakemake.pbs
 
 * To run the rules as individual jobs on a Slurm cluster:
 ```
-snakemake --profile config/slurm/ --latency 20
+snakemake --use-conda --profile config/slurm/ --latency 90
 ```
 Or to run a job that manages the workflow for you instead
 ```
