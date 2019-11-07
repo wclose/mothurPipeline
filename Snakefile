@@ -1,9 +1,17 @@
+# Snakefile
+# William L. Close
+# Schloss Lab
+# University of Michigan
+
 # Snakemake file for running mothur 16S pipeline
 
+# Configuration file containing all user-specified settings
 configfile: "config/config.yaml"
 
+# Function for aggregating list of raw sequencing files.
 mothurSamples = list(set(glob_wildcards(os.path.join('data/mothur/raw/', '{sample}_{readNum, R[12]}_001.fastq.gz')).sample))
 
+# Master rule for controlling workflow.
 rule all:
 	input:
 		expand("data/mothur/process/{group}.final.count.summary",
@@ -35,6 +43,8 @@ rule all:
 #
 ##################################################################
 
+# Downloading and formatting SILVA and RDP reference databases. The v4 region is extracted from 
+# SILVA database for use as reference alignment.
 rule get16SReferences:
 	input:
 		script="code/bash/mothurReferences.sh"
@@ -48,6 +58,7 @@ rule get16SReferences:
 		"bash {input.script}"
 
 
+# Downloading the Zymo mock sequence files and extracting v4 region for error estimation.
 rule get16SMock:
 	input:
 		script="code/bash/mothurMock.sh",
@@ -69,6 +80,7 @@ rule get16SMock:
 #
 ##################################################################
 
+# Generating master OTU shared file.
 rule make16SShared:
 	input:
 		script="code/bash/mothurShared.sh",
@@ -86,6 +98,8 @@ rule make16SShared:
 		"bash {input.script} data/mothur/raw/ {input.refs}"
 
 
+# Splitting master shared file into individual shared file for: i) samples, ii) controls, and iii) mocks.
+# This is used for optimal subsampling during downstream steps.
 rule split16SShared:
 	input:
 		script="code/bash/mothurSplitShared.sh",
@@ -102,6 +116,7 @@ rule split16SShared:
 		"bash {input.script} {params.mockGroups} {params.controlGroups}"
 
 
+# Counting number of reads in each of the new shared files.
 rule count16SShared:
 	input:
 		script="code/bash/mothurCountShared.sh",
@@ -114,6 +129,8 @@ rule count16SShared:
 		"bash {input.script} {input.shared}"
 
 
+# Uses read counts to subsample shared files to the largest number of reads above a given read
+# threshold denoted as 'subthresh'.
 rule subsample16SShared:
 	input:
 		script="code/bash/mothurSubsampleShared.sh",
@@ -150,6 +167,7 @@ rule rarefy16SReads:
 		"bash {input.script} {input.shared}"
 
 
+# Calculating alpha diversity metrics (within sample diversity).
 rule calc16SAlphaDiversity:
 	input:
 		script="code/bash/mothurAlpha.sh",
@@ -166,6 +184,7 @@ rule calc16SAlphaDiversity:
 		"bash {input.script} {input.shared} {input.count} {params.subthresh} {params.alpha}"
 
 
+# Calculating beta diversity metrics (between sample diversity).
 rule calc16SBetaDiversity:
 	input:
 		script="code/bash/mothurBeta.sh",
@@ -192,6 +211,7 @@ rule calc16SBetaDiversity:
 #
 ##################################################################
 
+# Calculates principal coordinate analysis (PCoA) ordination for visualizing beta diversity.
 rule calc16SPCoA:
 	input:
 		script="code/bash/mothurPCoA.sh",
@@ -205,6 +225,7 @@ rule calc16SPCoA:
 		"bash {input.script} {input.dist}"
 
 
+# Calculates non-metric multi-dimensional scaling (NMDS) ordination for visualizing beta diversity. 
 rule calc16SNMDS:
 	input:
 		script="code/bash/mothurNMDS.sh",
@@ -229,6 +250,7 @@ rule calc16SNMDS:
 #
 ##################################################################
 
+# Calculates estimated sequencing error rate based on mock sequences.
 rule calc16SError:
 	input:
 		script="code/bash/mothurError.sh",
@@ -243,3 +265,21 @@ rule calc16SError:
 		"envs/mothur.yaml"
 	shell:
 		"bash {input.script} {input.errorFasta} {input.errorCount} {input.mockV4} {params.mockGroups}"
+
+
+
+
+
+##################################################################
+#
+# Part 6: Cleaning 
+#
+##################################################################
+
+# Resets directory by deleting all files created by this workflow.
+rule clean:
+	shell:
+		"""
+		echo PROGRESS: Removing all workflow output.
+		rm -rf data/references/ data/process/
+		"""
