@@ -10,9 +10,7 @@
 
 # Set the variables to be used in this script
 export DIST=${1:?ERROR: Need to define DISTLIST.}
-
-# Other variables
-export SEED=20170415
+export SEED=${2:?ERROR: Need to define SEED.}
 
 
 
