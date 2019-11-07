@@ -1,36 +1,26 @@
-# Snakemake file for running mothur pipeline in Close_AbxVirome_XXXX_2019
+# Snakemake file for running mothur 16S pipeline
 
-# NOTE: Change these settings before running workflow
-mothurMock = ['Mock1','Mock2']
-mothurControl = ['NA','Water','Water2']
-mothurAlpha = ['nseqs','coverage','invsimpson','shannon','sobs']
-mothurBeta = ['sharedsobs','thetayc','braycurtis']
+configfile: "config/config.yaml"
 
-# Leave these settings as is
 mothurSamples = list(set(glob_wildcards(os.path.join('data/mothur/raw/', '{sample}_{readNum, R[12]}_001.fastq.gz')).sample))
-readNum = ['R1', 'R2']
-mothurGroups = ['sample','mock','control']
-
-
 
 rule all:
 	input:
 		expand("data/mothur/process/{group}.final.count.summary",
-			group = mothurGroups),
+			group = config["mothurGroups"]),
 		expand("data/mothur/process/{group}.final.0.03.subsample.shared",
 			group = ['sample','mock']),
 		"data/mothur/process/sample.final.groups.rarefaction",
 		"data/mothur/process/sample.final.groups.ave-std.summary",
 		expand("data/mothur/process/sample.final.{beta}.0.03.lt.ave.dist",
-			beta = mothurBeta),
+			beta = config["mothurBeta"]),
 		expand("data/mothur/process/sample.final.{beta}.0.03.lt.ave.nmds.axes",
-			beta = mothurBeta),
+			beta = config["mothurBeta"]),
 		expand("data/mothur/process/sample.final.{beta}.0.03.lt.ave.pcoa.axes",
-			beta = mothurBeta),
+			beta = config["mothurBeta"]),
 		"data/mothur/process/error_analysis/errorinput.pick.error.summary"
 	shell:
 		"""
-		rm data/mothur/process/*rabund
 		mkdir -p logs/mothur/
 		mv mothur*logfile logs/mothur/
 		"""
@@ -82,8 +72,8 @@ rule get16SMock:
 rule make16SShared:
 	input:
 		script="code/bash/mothurShared.sh",
-		raw=expand('data/mothur/raw/{mothurSamples}_{readNum}_001.fastq.gz',
-			mothurSamples = mothurSamples, readNum = readNum),
+		raw=expand('data/raw/{mothurSamples}_{readNum}_001.fastq.gz',
+			mothurSamples = mothurSamples, readNum = config["readNum"]),
 		refs=rules.get16SReferences.output
 	output:
 		shared="data/mothur/process/final.shared",
@@ -102,10 +92,10 @@ rule split16SShared:
 		shared=rules.make16SShared.output.shared
 	output:
 		shared=expand("data/mothur/process/{group}.final.shared",
-			group = mothurGroups)
+			group = config["mothurGroups"])
 	params:
-		mockGroups='-'.join(mothurMock), # Concatenates all mock group names with hyphens
-		controlGroups='-'.join(mothurControl) # Concatenates all control group names with hyphens
+		mockGroups='-'.join(config["mothurMock"]), # Concatenates all mock group names with hyphens
+		controlGroups='-'.join(config["mothurControl"]) # Concatenates all control group names with hyphens
 	conda:
 		"envs/mothur.yaml"
 	shell:
@@ -131,10 +121,12 @@ rule subsample16SShared:
 		count="data/mothur/process/{group}.final.count.summary"
 	output:
 		subsampleShared="data/mothur/process/{group}.final.0.03.subsample.shared"
+	params:
+		subthresh=config["subthresh"]
 	conda:
 		"envs/mothur.yaml"
 	shell:
-		"bash {input.script} {input.shared} {input.count}"
+		"bash {input.script} {input.shared} {input.count} {params.subthresh}"
 
 
 
@@ -166,11 +158,12 @@ rule calc16SAlphaDiversity:
 	output:
 		alpha="data/mothur/process/sample.final.groups.ave-std.summary"
 	params:
-		alpha='-'.join(mothurAlpha) # Concatenates all alpha metric names with hyphens
+		subthresh=config["subthresh"],
+		alpha='-'.join(config["mothurAlpha"]) # Concatenates all alpha metric names with hyphens
 	conda:
 		"envs/mothur.yaml"
 	shell:
-		"bash {input.script} {input.shared} {input.count} {params.alpha}"
+		"bash {input.script} {input.shared} {input.count} {params.subthresh} {params.alpha}"
 
 
 rule calc16SBetaDiversity:
@@ -180,13 +173,14 @@ rule calc16SBetaDiversity:
 		count="data/mothur/process/sample.final.count.summary"
 	output:
 		dist=expand("data/mothur/process/sample.final.{beta}.0.03.lt.ave.dist",
-			beta = mothurBeta)
+			beta = config["mothurBeta"])
 	params:
-		beta='-'.join(mothurBeta) # Concatenates all beta metric names with hyphens
+		subthresh=config["subthresh"],
+		beta='-'.join(config["mothurBeta"]) # Concatenates all beta metric names with hyphens
 	conda:
 		"envs/mothur.yaml"
 	shell:
-		"bash {input.script} {input.shared} {input.count} {params.beta}"
+		"bash {input.script} {input.shared} {input.count} {params.subthresh} {params.beta}"
 
 
 
@@ -218,10 +212,12 @@ rule calc16SNMDS:
 	output:
 		stress="data/mothur/process/sample.final.{beta}.0.03.lt.ave.nmds.stress",
 		axes="data/mothur/process/sample.final.{beta}.0.03.lt.ave.nmds.axes"
+	params:
+		seed=config["seed"]
 	conda:
 		"envs/mothur.yaml"
 	shell:
-		"bash {input.script} {input.dist}"
+		"bash {input.script} {input.dist} {params.seed}"
 
 
 
@@ -242,7 +238,7 @@ rule calc16SError:
 	output:
 		summary="data/mothur/process/error_analysis/errorinput.pick.error.summary"
 	params:
-		mockGroups='-'.join(mothurMock) # Concatenates all mock group names with hyphens
+		mockGroups='-'.join(config["mothurMock"]) # Concatenates all mock group names with hyphens
 	conda:
 		"envs/mothur.yaml"
 	shell:
