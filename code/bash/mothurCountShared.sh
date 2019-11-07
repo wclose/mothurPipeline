@@ -9,7 +9,7 @@
 ##################
 
 # Set the variables to be used in this script
-export SHARED=${@:?ERROR: Need to define SHARED} # Shared file to be counted
+export SHARED=${1:?ERROR: Need to define SHARED} # Shared file to be counted
 
 
 
