@@ -18,7 +18,7 @@ export MOCKV4=${3:?ERROR: Need to define MOCKV4.}
 export MOCKGROUPS=${4:?ERROR: Need to define MOCKGROUPS.} # List of mock groups in raw data dir separated by '-'
 
 # Other variables
-export OUTDIR=data/mothur/process
+export OUTDIR=data/mothur/process/
 
 
 
