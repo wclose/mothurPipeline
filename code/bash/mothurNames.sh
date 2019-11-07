@@ -9,7 +9,7 @@
 ##################
 
 # Set the variables to be used in this script
-export SAMPLEDIR=$1
+export SAMPLEDIR=${1:?ERROR: Need to define SAMPLEDIR.}
 
 # Character(s) to be used in place of hyphens
 export REPLACEMENT=$2
