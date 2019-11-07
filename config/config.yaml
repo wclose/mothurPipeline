@@ -12,13 +12,11 @@
 # NOTE: As required, change these settings before running workflow.
 
 # Group names of mock samples (e.g. Mock1_S1_L001_R1_001.fastq.gz = Mock1).
-# NOTE: If you don't have any mock samples, keep heading but delete list items underneath heading.
 mothurMock:
   - Mock1
   - Mock2
 
 # Group names of control samples (e.g. Water1_S2_L001_R1_001.fastq.gz = Water1).
-# NOTE: If you don't have any control samples, keep heading but delete list items underneath heading.
 mothurControl:
   - NA
   - Water
