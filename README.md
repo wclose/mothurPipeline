@@ -5,34 +5,42 @@ This repo can be used to generate all of the desired output files from mothur (s
 ### Usage
 
 #### Dependencies
+* MacOSX or Linux operating system.
 * Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 * Have paired end sequencing data.
-* That's it!
 
 <br />
 
 #### Running analysis
 
-**1.** Transfer all of your raw paired-end sequencing data into `data/mothur/raw` in this repo. 
-> **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). 
-
-<br />
-
-E.g. a sequence file from mouse 10, day 10:  
-* **BAD** = *M10-10*_S91_L001_R1_001.fastq.gz  
-* **BAD** = *M10_10*_S91_L001_R1_001.fastq.gz  
-* **GOOD** = *M10D10*_S91_L001_R1_001.fastq.gz
-
-<br />
-
-There is a script (`coda/bash/mothurNames.sh`) you can use to change hyphens to something else. Feel free to modify it for removing extra underscores as needed.
+**1.** Clone this repository and move into the project directory.
 ```
-cp PATH/TO/SEQUENCEDIR/* data/mothur/raw
+git clone https://github.com/wclose/mothurPipeline.git
+cd mothurPipeline
 ```
 
 <br />
 
-**2.** Create the master Snakemake environment.
+**2.** Transfer all of your raw paired-end sequencing data into `data/mothur/raw/`. 
+> **NOTE:** Because of the way `mothur` parses sample names, it doesn't like it when you have hyphens or underscores in the **sample names** (emphasis on sample names, **not** the filename itself). There is a script (`code/bash/mothurNames.sh`) you can use to change hyphens to something else. Feel free to modify it for removing extra underscores as needed.
+>
+> <br />
+>
+> E.g. a sequence file from mouse 10, day 10:  
+> * **BAD** = *M10-10*_S91_L001_R1_001.fastq.gz  
+> * **BAD** = *M10_10*_S91_L001_R1_001.fastq.gz  
+> * **GOOD** = *M10D10*_S91_L001_R1_001.fastq.gz
+
+<br />
+
+Copy sequences to the raw data directory.
+```
+cp PATH/TO/SEQUENCEDIR/* data/mothur/raw/
+```
+
+<br />
+
+**3.** Create the master Snakemake environment.
 > **NOTE:** If you already have a conda environment with snakemake installed, you can skip this step.
 ```
 conda env create -f envs/snakemake.yaml
@@ -40,14 +48,14 @@ conda env create -f envs/snakemake.yaml
 
 <br />
 
-**3.** Activate the environment that contains snakemake.
+**4.** Activate the environment that contains snakemake.
 ```
 conda activate snakemake
 ```
 
 <br />
 
-**4.** Edit the options at the top of the Snakefile to set downstream analysis options.
+**5.** Edit the options at the top of the Snakefile to set downstream analysis options.
 ```
 nano Snakefile
 ```
@@ -60,21 +68,22 @@ Things to change (everything else can/should be left as is):
 
 <br />
 
-**5.** Test the workflow to make sure everything looks good.
+**6.** Test the workflow to make sure everything looks good.
 ```
 snakemake -np
 ```
 
 <br />
 
-**6** If you want to see how everything fits together, you can run the following to generate a flowchart of the various steps. You may need to download the resulting image locally to view it properly.
+**7.** If you want to see how everything fits together, you can run the following to generate a flowchart of the various steps. Alternatively, I have included the [flowchart](dag.svg) for the test data to show how everything fits together. You may need to download the resulting image locally to view it properly.
+> **NOTE:** If you are using MacOSX, you will need to install `dot` using [homebrew](https://brew.sh/) or some alternative process before running the following command.
 ```
 snakemake --dag | dot -Tsvg > dag.svg
 ```
 
 <br />
 
-**7.** Run the workflow to generate the desired outputs. All of the results will be available in `data/mothur/process/` when the workflow is completed. Should something go wrong, all of the log files will be available in `logs/mothur/`.
+**8.** Run the workflow to generate the desired outputs. All of the results will be available in `data/mothur/process/` when the workflow is completed. Should something go wrong, all of the log files will be available in `logs/mothur/`.
 ```
 snakemake --use-conda
 ```
@@ -103,7 +112,7 @@ snakemake --use-conda
 mkdir -p logs/pbs/
 snakemake --use-conda --profile config/pbs-torque/ --latency 90
 ```
-Or to run a job that manages the workflow for you instead
+Or to run a job that manages the workflow for you instead:
 ```
 qsub code/snakemake.pbs
 ```
@@ -115,7 +124,7 @@ qsub code/snakemake.pbs
 mkdir -p logs/slurm/
 snakemake --use-conda --profile config/slurm/ --latency 90
 ```
-Or to run a job that manages the workflow for you instead
+Or to run a job that manages the workflow for you instead:
 ```
 sbatch code/snakemake.sh
 ```
