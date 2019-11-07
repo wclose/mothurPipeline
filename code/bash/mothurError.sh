@@ -9,9 +9,6 @@
 ##################
 
 # Set the variables to be used in this script
-# export WORKDIR=$1
-# export REFDIR=$2
-
 export ERRORFASTA=${1:?ERROR: Need to define ERRORFASTA.}
 export ERRORCOUNT=${2:?ERROR: Need to define ERRORCOUNT.}
 export MOCKV4=${3:?ERROR: Need to define MOCKV4.}
@@ -40,5 +37,3 @@ echo PROGRESS: Storing error logs.
 mkdir -p "${OUTDIR}"/error_analysis
 
 mv "${OUTDIR}"/errorinput.* "${OUTDIR}"/error_analysis/
-
-
