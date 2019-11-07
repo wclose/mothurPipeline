@@ -9,7 +9,7 @@
 ##################
 
 # Other variables
-export OUTDIR=data/mothur/references # Directory for storing mothur reference files
+export OUTDIR=data/mothur/references/ # Directory for storing mothur reference files
 
 
 
