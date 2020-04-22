@@ -1,4 +1,4 @@
-name: mothur
+name: snakemake
 channels:
   - conda-forge
   - bioconda
