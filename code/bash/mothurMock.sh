@@ -25,7 +25,7 @@ mkdir -p "${OUTDIR}"/ "${OUTDIR}"/tmp/
 # We use ZymoBIOMICS Microbial Community Standard (Cat. no. D6306) as our mock community standard
 # More information can be found at https://www.zymoresearch.com/zymobiomics-community-standard
 # Downloading sequence files for mock community members
-wget -N -P "${OUTDIR}"/tmp/ https://s3.amazonaws.com/zymo-files/BioPool/ZymoBIOMICS.STD.refseq.v2.zip
+curl -L -R -o "${OUTDIR}"/tmp/ZymoBIOMICS.STD.refseq.v2.zip -z "${OUTDIR}"/tmp/ZymoBIOMICS.STD.refseq.v2.zip https://s3.amazonaws.com/zymo-files/BioPool/ZymoBIOMICS.STD.refseq.v2.zip
 
 # Decompressing
 unzip -o "${OUTDIR}"/tmp/ZymoBIOMICS.STD.refseq.v2.zip -d "${OUTDIR}"/tmp/
