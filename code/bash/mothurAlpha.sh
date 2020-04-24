@@ -9,13 +9,13 @@
 ##################
 
 # Set the variables to be used in this script
-export SHARED=${1:?ERROR: Need to define SHARED.} # Shared file
-export COUNT=${2:?ERROR: Need to define COUNT.} # Count file generated from shared file
-export SUBTHRESH=${3:?ERROR: Need to define SUBTHRESH.} # Setting threshold for minimum number of reads to subsample
-export ALPHA=${4:?ERROR: Need to define ALPHA.} # Names of mothur alpha metrics joined by hyphens
+SHARED=${1:?ERROR: Need to define SHARED.} # Shared file
+COUNT=${2:?ERROR: Need to define COUNT.} # Count file generated from shared file
+SUBTHRESH=${3:?ERROR: Need to define SUBTHRESH.} # Setting threshold for minimum number of reads to subsample
+ALPHA=${4:?ERROR: Need to define ALPHA.} # Names of mothur alpha metrics joined by hyphens
 
 # Other settings
-export OUTDIR=$(echo "${SHARED}" | sed 's:\(.*/\).*:\1:')
+OUTDIR=$(echo "${SHARED}" | sed 's:\(.*/\).*:\1:')
 
 
 

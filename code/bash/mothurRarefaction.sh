@@ -9,10 +9,10 @@
 ##################
 
 # Set the variables to be used in this script
-export SHARED=${1:?ERROR: Need to define SHARED}
+SHARED=${1:?ERROR: Need to define SHARED}
 
 # Other settings
-export OUTDIR=$(echo "${SHARED}" | sed 's:\(.*/\).*:\1:')
+OUTDIR=$(echo "${SHARED}" | sed 's:\(.*/\).*:\1:')
 
 
 

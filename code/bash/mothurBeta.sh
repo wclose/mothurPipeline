@@ -9,10 +9,10 @@
 ##################
 
 # Set the variables to be used in this script
-export SHARED=${1:?ERROR: Need to define SHARED.} # Shared file
-export COUNT=${2:?ERROR: Need to define COUNT.} # Count file generated from shared file
-export SUBTHRESH=${3:?ERROR: Need to define SUBTHRESH.} # Setting threshold for minimum number of reads to subsample
-export BETA=${4:?ERROR: Need to define BETA.} # Names of mothur beta metrics joined by hyphens
+SHARED=${1:?ERROR: Need to define SHARED.} # Shared file
+COUNT=${2:?ERROR: Need to define COUNT.} # Count file generated from shared file
+SUBTHRESH=${3:?ERROR: Need to define SUBTHRESH.} # Setting threshold for minimum number of reads to subsample
+BETA=${4:?ERROR: Need to define BETA.} # Names of mothur beta metrics joined by hyphens
 
 
 

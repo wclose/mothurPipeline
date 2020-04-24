@@ -9,13 +9,13 @@
 ##################
 
 # Set the variables to be used in this script
-export ERRORFASTA=${1:?ERROR: Need to define ERRORFASTA.}
-export ERRORCOUNT=${2:?ERROR: Need to define ERRORCOUNT.}
-export MOCKV4=${3:?ERROR: Need to define MOCKV4.}
-export MOCKGROUPS=${4:?ERROR: Need to define MOCKGROUPS.} # List of mock groups in raw data dir separated by '-'
+ERRORFASTA=${1:?ERROR: Need to define ERRORFASTA.}
+ERRORCOUNT=${2:?ERROR: Need to define ERRORCOUNT.}
+MOCKV4=${3:?ERROR: Need to define MOCKV4.}
+MOCKGROUPS=${4:?ERROR: Need to define MOCKGROUPS.} # List of mock groups in raw data dir separated by '-'
 
 # Other variables
-export OUTDIR=data/mothur/process/
+OUTDIR=data/mothur/process/
 
 
 

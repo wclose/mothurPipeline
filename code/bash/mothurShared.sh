@@ -9,13 +9,13 @@
 ##################
 
 # Set the variables to be used in this script
-export SAMPLEDIR=${1:?ERROR: Need to define SAMPLEDIR.}
-export SILVAV4=${2:?ERROR: Need to define SILVAV4.}
-export RDPFASTA=${3:?ERROR: Need to define RDPFASTA.}
-export RDPTAX=${4:?ERROR: Need to define RDPTAX.}
+SAMPLEDIR=${1:?ERROR: Need to define SAMPLEDIR.}
+SILVAV4=${2:?ERROR: Need to define SILVAV4.}
+RDPFASTA=${3:?ERROR: Need to define RDPFASTA.}
+RDPTAX=${4:?ERROR: Need to define RDPTAX.}
 
 # Other variables
-export OUTDIR=data/mothur/process/
+OUTDIR=data/mothur/process/
 
 
 

@@ -9,7 +9,7 @@
 ##################
 
 # Set the variables to be used in this script
-export DIST=${1:?ERROR: Need to define DIST.}
+DIST=${1:?ERROR: Need to define DIST.}
 
 
 
