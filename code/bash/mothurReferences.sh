@@ -33,18 +33,13 @@ curl -L -R -o "${OUTDIR}"/tmp/silva.nr_v132.tgz -z "${OUTDIR}"/tmp/silva.nr_v132
 # Decompressing the database
 tar -xvzf "${OUTDIR}"/tmp/silva.nr_v132.tgz -C "${OUTDIR}"/tmp/
 
-# Using mothur to pull out bacterial sequences and remove sequence gaps
+# Using mothur to pull out bacterial sequences and only keep sequences from the v4 region of the 16S rRNA DNA region
 mothur "#get.lineage(fasta="${OUTDIR}"/tmp/silva.nr_v132.align, taxonomy="${OUTDIR}"/tmp/silva.nr_v132.tax, taxon=Bacteria);
-	degap.seqs(fasta="${OUTDIR}"/tmp/silva.nr_v132.pick.align, processors=8)"
+	pcr.seqs(fasta=current, start=11894, end=25319, keepdots=F, processors=8)"
 
-# Renaming the output file and moving it from the tmp dir to the output dir
-mv "${OUTDIR}"/tmp/silva.nr_v132.pick.align "${OUTDIR}"/silva.seed.align
-
-# Using mothur to only keep sequences from the v4 region of the 16S rRNA DNA region
-mothur "#pcr.seqs(fasta="${OUTDIR}"/silva.seed.align, start=11894, end=25319, keepdots=F, processors=8)"
-
-# Renaming the final v4 SILVA reference file
-mv "${OUTDIR}"/silva.seed.pcr.align "${OUTDIR}"/silva.v4.align
+# Renaming the final output files
+mv "${OUTDIR}"/tmp/silva.nr_v132.pick.align "${OUTDIR}"/silva.nr.align
+mv "${OUTDIR}"/tmp/silva.nr_v132.pick.pcr.align "${OUTDIR}"/silva.v4.align
 
 
 
