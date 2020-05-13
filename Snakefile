@@ -281,5 +281,5 @@ rule clean:
 	shell:
 		"""
 		echo PROGRESS: Removing all workflow output.
-		rm -rf data/references/ data/process/
+		rm -rf data/mothur/references/ data/mothur/process/
 		"""
