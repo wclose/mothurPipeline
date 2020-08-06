@@ -53,7 +53,7 @@ curl -L -R -o "${OUTDIR}"/tmp/trainset16_022016.pds.tgz -z "${OUTDIR}"/tmp/train
 tar -xvzf "${OUTDIR}"/tmp/trainset16_022016.pds.tgz -C "${OUTDIR}"/tmp/
 
 # Move the taxonomy files out of the tmp dir
-mv "${OUTDIR}"/tmp/trainset16_022016.rdp/trainset16_022016* "${OUTDIR}"/
+mv "${OUTDIR}"/tmp/trainset16_022016.pds/trainset16_022016* "${OUTDIR}"/
 
 
 
