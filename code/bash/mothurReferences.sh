@@ -47,10 +47,10 @@ echo PROGRESS: Preparing Ribosomal Database Project taxonomy files.
 
 # Downloading the prepared RDP database from the mothur website
 # For more information see https://mothur.org/wiki/rdp_reference_files/
-curl -L -R -o "${OUTDIR}"/tmp/trainset16_022016.rdp.tgz -z "${OUTDIR}"/tmp/trainset16_022016.rdp.tgz https://mothur.s3.us-east-2.amazonaws.com/wiki/trainset16_022016.rdp.tgz
+curl -L -R -o "${OUTDIR}"/tmp/trainset16_022016.pds.tgz -z "${OUTDIR}"/tmp/trainset16_022016.pds.tgz https://mothur.s3.us-east-2.amazonaws.com/wiki/trainset16_022016.pds.tgz
 
 # Decompressing the database
-tar -xvzf "${OUTDIR}"/tmp/trainset16_022016.rdp.tgz -C "${OUTDIR}"/tmp/
+tar -xvzf "${OUTDIR}"/tmp/trainset16_022016.pds.tgz -C "${OUTDIR}"/tmp/
 
 # Move the taxonomy files out of the tmp dir
 mv "${OUTDIR}"/tmp/trainset16_022016.rdp/trainset16_022016* "${OUTDIR}"/
