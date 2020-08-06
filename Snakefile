@@ -50,8 +50,8 @@ rule get16SReferences:
 		script="code/bash/mothurReferences.sh"
 	output:
 		silvaV4="data/mothur/references/silva.v4.align",
-		rdpFasta="data/mothur/references/trainset16_022016.rdp.fasta",
-		rdpTax="data/mothur/references/trainset16_022016.rdp.tax"
+		rdpFasta="data/mothur/references/trainset16_022016.pds.fasta",
+		rdpTax="data/mothur/references/trainset16_022016.pds.tax"
 	conda:
 		"envs/mothur.yaml"
 	shell:
