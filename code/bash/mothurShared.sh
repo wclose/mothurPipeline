@@ -16,6 +16,7 @@ RDPTAX=${4:?ERROR: Need to define RDPTAX.}
 
 # Other variables
 OUTDIR=data/mothur/process/
+ERRORDIR="${OUTDIR}"/error_analysis/
 
 
 
@@ -26,7 +27,7 @@ OUTDIR=data/mothur/process/
 echo PROGRESS: Assembling, quality controlling, clustering, and classifying sequences.
 
 # Making output dir
-mkdir -p "${OUTDIR}"
+mkdir -p "${OUTDIR}" "${ERRORDIR}"
 
 # Making contigs from fastq.gz files, aligning reads to references, removing any non-bacterial sequences, calculating distance matrix, making shared file, and classifying OTUs
 mothur "#make.file(type=gz, inputdir="${SAMPLEDIR}", outputdir="${OUTDIR}");
@@ -52,8 +53,8 @@ mothur "#make.file(type=gz, inputdir="${SAMPLEDIR}", outputdir="${OUTDIR}");
 
 
 # Renaming output files for use later
-mv "${OUTDIR}"/*.precluster.pick.pick.fasta "${OUTDIR}"/errorinput.fasta
-mv "${OUTDIR}"/*.vsearch.pick.pick.count_table "${OUTDIR}"/errorinput.count_table
+mv "${OUTDIR}"/*.precluster.pick.pick.fasta "${ERRORDIR}"/errorinput.fasta
+mv "${OUTDIR}"/*.vsearch.pick.pick.count_table "${ERRORDIR}"/errorinput.count_table
 mv "${OUTDIR}"/*.opti_mcc.shared "${OUTDIR}"/final.shared
 mv "${OUTDIR}"/*.cons.taxonomy "${OUTDIR}"/final.taxonomy
 mv "${OUTDIR}"/*.0.03.rep.fasta "${OUTDIR}"/final.rep.seqs

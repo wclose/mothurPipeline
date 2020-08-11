@@ -28,12 +28,3 @@ echo PROGRESS: Calculating sequencing error rate.
 
 mothur "#get.groups(fasta="${ERRORFASTA}", count="${ERRORCOUNT}", groups="${MOCKGROUPS}");
 	seq.error(fasta=current, count=current, reference="${MOCKV4}", aligned=F)"
-
-
-
-# Moving error analysis files to error directory
-echo PROGRESS: Storing error logs.
-
-mkdir -p "${OUTDIR}"/error_analysis
-
-mv "${OUTDIR}"/errorinput.* "${OUTDIR}"/error_analysis/

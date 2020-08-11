@@ -90,8 +90,8 @@ rule make16SShared:
 	output:
 		shared="data/mothur/process/final.shared",
 		taxonomy="data/mothur/process/final.taxonomy",
-		errorFasta="data/mothur/process/errorinput.fasta",
-		errorCount="data/mothur/process/errorinput.count_table"
+		errorFasta="data/mothur/process/error_analysis/errorinput.fasta",
+		errorCount="data/mothur/process/error_analysis/errorinput.count_table"
 	conda:
 		"envs/mothur.yaml"
 	shell:
