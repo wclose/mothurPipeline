@@ -3,4 +3,4 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - mothur=1.42.3
+  - mothur=1.44.1
